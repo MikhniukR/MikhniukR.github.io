@@ -1,0 +1,133 @@
+body {
+	margin: 0;
+	padding-left: 15%;
+	padding-right: 15%;
+	font-family: 'Source Code Pro', monospace;
+	font-size: 18px;
+}
+
+main {
+
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: auto;
+	grid-template-areas:
+		"title update_weather update_weather ."
+		"main_city main_city weather_parametrs weather_parametrs"
+		"weather_image temperature weather_parametrs weather_parametrs"
+		"favorites . add_city add_city";
+}
+
+h1 {
+	color: #C0C0C0;
+}
+
+h2 {
+	color: #A0A0A0;
+	font-size: 40px;
+	font-weight: bold;
+}
+
+ul {
+	margin: 0;
+	list-style-type: none;
+	padding: 0px;
+}
+
+li {
+	display: flex;
+	justify-content: space-between;
+	background-color: #A0A0A0;
+	padding: 2%;
+	margin-right: 0px;
+	margin-left: 0px; 
+	margin-bottom: 3%;
+	color: white;
+	font-size: 14px;
+}
+
+.main_city_temperature {
+	font-weight: bold;
+	margin: 0;
+	font-size: 90px;
+	color: #696969;
+}
+
+.update_weather_button {
+	background-color: #C0C0C0;
+	border: none;
+	border-radius: 5px;
+	font-size: 12px;
+	padding: 14px 40px;
+	margin-top: 3%;
+	width: 75%;
+	color: #696969;
+}
+
+.parametr {
+	font-weight: bold;
+}
+
+.add_city {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.add_city_input {
+	background-color: #DCDCDC;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	width: 75%;
+}
+
+.round_button {
+	margin-left: 15px;
+	padding: 13px;
+	font-size: 24px;
+	color: #FFFFFF;
+	border: none;
+	background-color: #A0A0A0;
+	border-radius: 50%;
+}
+
+/*====================================GRID DEFINE=====================================*/
+
+.title{
+	grid-area: title;
+}
+
+
+.update_weather {
+	grid-area: update_weather;
+}
+
+.main_city{
+	grid-area: main_city;
+}
+
+
+.weather_image {
+	grid-area: weather_image;
+}
+
+
+.temperature{
+	grid-area: temperature;
+}
+
+
+.weather_parametrs {
+	grid-area: weather_parametrs;
+}
+
+.favorites{
+	grid-area: favorites;
+}
+
+
+.add_city {
+	grid-area: add_city;
+}
