@@ -12,10 +12,11 @@ main {
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: auto;
 	grid-template-areas:
-		"title update_weather update_weather ."
+		"title update_geo update_geo ."
 		"main_city main_city weather_parametrs weather_parametrs"
 		"weather_image temperature weather_parametrs weather_parametrs"
-		"favorites . add_city add_city";
+		"favorites . add_city add_city"
+		"favorites_cities favorites_cities favorites_cities favorites_cities";
 }
 
 h1 {
@@ -28,6 +29,10 @@ h2 {
 	font-weight: bold;
 }
 
+h3 {
+	font-size: 30px;
+}
+
 ul {
 	margin: 0;
 	list-style-type: none;
@@ -38,10 +43,6 @@ li {
 	display: flex;
 	justify-content: space-between;
 	background-color: #A0A0A0;
-	padding: 2%;
-	margin-right: 0px;
-	margin-left: 0px; 
-	margin-bottom: 3%;
 	color: white;
 	font-size: 14px;
 }
@@ -53,7 +54,19 @@ li {
 	color: #696969;
 }
 
-.update_weather_button {
+.update_geo {
+	display: flex;
+	align-items: baseline;
+	justify-content: center;
+}
+
+#update_geo_image {
+	width: 36px;
+	height: 36px;
+	display: none;
+}
+
+.update_geo_button {
 	background-color: #C0C0C0;
 	border: none;
 	border-radius: 5px;
@@ -64,8 +77,14 @@ li {
 	color: #696969;
 }
 
+.weather_parametrs li, .favorite_city_parametrs li {
+	padding: 2%;
+	margin-bottom: 3%;
+}
+
 .parametr {
 	font-weight: bold;
+	font-size: 15px;
 }
 
 .add_city {
@@ -93,6 +112,50 @@ li {
 	border-radius: 50%;
 }
 
+
+/*todo change to grid*/
+.favorites_cities {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+
+.favorite_city {
+	background-color: #FFFFFF;
+	color: #505050;
+	width: 300px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: auto;
+	grid-template-areas:
+		"favorite_city_name favorite_city_temperature favorite_city_image favorite_city_close"
+		"favorite_city_parametrs favorite_city_parametrs favorite_city_parametrs favorite_city_parametrs";
+}
+
+
+.favorite_city_temperature{
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
+}
+
+.favorite_city_image{
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.favorite_city_close {
+	font-weight: bold;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
 /*====================================GRID DEFINE=====================================*/
 
 .title{
@@ -100,8 +163,8 @@ li {
 }
 
 
-.update_weather {
-	grid-area: update_weather;
+.update_geo {
+	grid-area: update_geo;
 }
 
 .main_city{
@@ -130,4 +193,80 @@ li {
 
 .add_city {
 	grid-area: add_city;
+}
+
+.favorites_cities {
+	grid-area: favorites_cities;
+}
+
+
+.favorite_city_name{
+	grid-area: favorite_city_name;
+}
+
+
+.favorite_city_temperature {
+	grid-area: favorite_city_temperature;
+}
+
+.favorite_city_image{
+	grid-area: favorite_city_image;
+}
+
+
+.favorite_city_close {
+	grid-area: favorite_city_close;
+}
+
+.favorite_city_parametrs {
+	grid-area: favorite_city_parametrs;
+}
+
+
+/*====================================SCREEN SIZES=====================================*/
+@media screen and (max-width: 900px) {
+	body {
+		font-size: 14px;
+	}
+	main {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: auto;
+		grid-template-areas:
+			"title update_geo"
+			"main_city main_city"
+			"weather_image temperature"
+			"weather_parametrs weather_parametrs"
+			"favorites . "
+			"add_city add_city"
+			"favorites_cities favorites_cities";
+	}
+
+	.favorite_city {
+		width: 100%;
+	}
+
+	.update_geo_button {
+		width: 60px;
+		height: 60px;
+		padding: 0;
+	}
+
+	#update_geo_image{
+		width: 50px;
+		height: 50px;
+		margin: 0 auto;
+	}
+
+	.add_city_input {
+		width: 100%;
+	}
+
+	#update_geo_image {
+		display: block;
+	}
+
+	#update_geo_text {
+		display: none;
+	}
 }
