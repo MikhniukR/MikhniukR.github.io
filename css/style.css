@@ -3,7 +3,7 @@ body {
 	padding-left: 15%;
 	padding-right: 15%;
 	font-family: 'Source Code Pro', monospace;
-	font-size: 18px;
+	font-size: 18px; /*comfortly heare*/
 }
 
 main {
@@ -112,19 +112,17 @@ li {
 	border-radius: 50%;
 }
 
-
-/*todo change to grid*/
 .favorites_cities {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(auto-fill);
+	grid-row-gap: .5em;
+	grid-column-gap: 1em;
 }
-
 
 .favorite_city {
 	background-color: #FFFFFF;
 	color: #505050;
-	width: 300px;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: auto;
@@ -224,10 +222,17 @@ li {
 
 
 /*====================================SCREEN SIZES=====================================*/
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1200px) {
 	body {
 		font-size: 14px;
 	}
+
+	h2 {
+		font-size: 30px;
+	}
+}
+
+@media screen and (max-width: 900px) {
 	main {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
@@ -241,6 +246,19 @@ li {
 			"add_city add_city"
 			"favorites_cities favorites_cities";
 	}
+
+	body {
+		font-size: 18px;
+	}
+
+	.favorites_cities {
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		grid-template-rows: repeat(auto-fill);
+		grid-row-gap: .5em;
+		grid-column-gap: 1em;
+	}
+
 
 	.favorite_city {
 		width: 100%;
