@@ -103,8 +103,10 @@ li {
 }
 
 .round_button {
+	height:50px;
+    width:50px;
 	margin-left: 15px;
-	padding: 13px;
+	padding: 0;
 	font-size: 24px;
 	color: #FFFFFF;
 	border: none;
@@ -222,17 +224,39 @@ li {
 
 
 /*====================================SCREEN SIZES=====================================*/
+@media screen and (max-width: 1550px) {
+	body {
+		font-size: 16px;
+	}
+}
+
 @media screen and (max-width: 1200px) {
 	body {
-		font-size: 14px;
+		font-size: 12px;
 	}
 
 	h2 {
 		font-size: 30px;
 	}
+	.main_city_temperature {
+		font-size: 70px;
+	}
+	.add_city_input {
+		font-size: 12px;
+	}
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1050px) {
+	body {
+		font-size: 10px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	body {
+		padding-left: 0;
+		padding-right: 0;
+	}
 	main {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
@@ -286,5 +310,30 @@ li {
 
 	#update_geo_text {
 		display: none;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	body {
+		font-size: 14px;
+	}
+	.update_geo_button {
+		width: 40px;
+		height: 40px;
+		padding: 0;
+	}
+
+	#update_geo_image {
+		width: 36px;
+		height: 36px;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	body {
+		font-size: 10px;
+	}
+	h2 {
+		font-size: 20px;
 	}
 }
