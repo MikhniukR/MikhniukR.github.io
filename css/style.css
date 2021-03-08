@@ -3,7 +3,7 @@ body {
 	padding-left: 15%;
 	padding-right: 15%;
 	font-family: 'Source Code Pro', monospace;
-	font-size: 18px; /*comfortly heare*/
+	font-size: 16px; /*comfortly heare*/
 }
 
 main {
@@ -50,7 +50,7 @@ li {
 .main_city_temperature {
 	font-weight: bold;
 	margin: 0;
-	font-size: 108px;
+	font-size: 80px;
 	color: #696969;
 }
 
@@ -226,20 +226,24 @@ li {
 /*====================================SCREEN SIZES=====================================*/
 @media screen and (max-width: 1550px) {
 	body {
-		font-size: 16px;
+		font-size: 15px;
+	}
+
+	.main_city_temperature {
+		font-size: 60px;
 	}
 }
 
 @media screen and (max-width: 1200px) {
 	body {
-		font-size: 12px;
+		font-size: 11px;
 	}
 
 	h2 {
 		font-size: 30px;
 	}
 	.main_city_temperature {
-		font-size: 70px;
+		font-size: 55px;
 	}
 	.add_city_input {
 		font-size: 12px;
@@ -250,6 +254,10 @@ li {
 	body {
 		font-size: 10px;
 	}
+
+	.main_city_temperature {
+		font-size: 50px;
+	}
 }
 
 @media screen and (max-width: 768px) {
@@ -257,6 +265,24 @@ li {
 		padding-left: 0;
 		padding-right: 0;
 	}
+
+	.main_city_temperature {
+		font-size: 50px;
+	}
+
+	.favorite_city_temperature{
+		font-size: 20px;
+	}
+
+	h3 {
+		font-size: 20px;
+	}
+
+	.round_button {
+		height: 30px;
+	    width: 30px;
+	}
+
 	main {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
@@ -278,7 +304,7 @@ li {
 	.favorites_cities {
 		display: grid;
 		grid-template-columns: repeat(1, 1fr);
-		grid-template-rows: repeat(auto-fill);
+		grid-template-rows: repeat(2, 50%);
 		grid-row-gap: .5em;
 		grid-column-gap: 1em;
 	}
@@ -317,6 +343,9 @@ li {
 	body {
 		font-size: 14px;
 	}
+	.main_city_temperature {
+		font-size: 40px;
+	}
 	.update_geo_button {
 		width: 40px;
 		height: 40px;
@@ -330,6 +359,9 @@ li {
 }
 
 @media screen and (max-width: 425px) {
+	.main_city_temperature {
+		font-size: 35px;
+	}
 	body {
 		font-size: 10px;
 	}

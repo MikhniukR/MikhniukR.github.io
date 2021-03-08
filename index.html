@@ -10,16 +10,18 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap" rel="stylesheet">
 	<link rel="icon" href="images/icon.png"> 
+	<script src="js/consts.js"></script>
 	<script src="js/mainWeather.js"></script>
+	<script src="js/favoritesWeather.js"></script>
 </head>
-<body onload="main();">
+<body onload="loadMainCity(); loadFavorites();">
 	<main>
 		<div class = "title">
 			<h1>Погода здесь</h1>
 		</div>
 		
 		<div class="update_geo">
-			<button class="update_geo_button">
+			<button class="update_geo_button" onclick = "reloadMainCity();">
 				<img id="update_geo_image" src="images/update.png"></img>
 				<div id="update_geo_text">Обновить геолокацию</div>
 			</button>
@@ -50,12 +52,12 @@
 		</div>
 
 		<div class = "add_city">
-			<input class = "add_city_input" placeholder="Добавить новый город">
-			<button class = "round_button">+</button>
+			<input id = "add_city_input" class = "add_city_input" placeholder = "Добавить новый город" onkeydown="checkIsEnter()">
+			<button class = "round_button" onclick = "addNewCityToFavorite()">+</button>
 		</div>
 
-		<ul class = "favorites_cities">
-			<li class = "favorite_city" style="display: none;">
+		<ul class = "favorites_cities" id = "favorites_cities">
+			<li class = "favorite_city" style="display: none;" >
 				<div class="favorite_city_name">
 					<h3>Moscow</h3>
 				</div>

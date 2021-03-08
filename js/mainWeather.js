@@ -1,8 +1,6 @@
-const API_KEY = "18c033e445ea591aedd6271d3b432f4a"
-
 function updateMainCityWeather(weatherData) {
 	document.getElementsByClassName("main_city_name")[0].innerHTML = weatherData.name;
-	document.getElementsByClassName("main_city_temperature")[0].innerHTML = weatherData.main.temp + "°C";
+	document.getElementsByClassName("main_city_temperature")[0].innerHTML = ~~weatherData.main.temp + "°C";
 	document.getElementsByClassName("weather_image")[0].innerHTML = `<img src="https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png" width=100 height=100></img>`;
 	document.getElementsByClassName("weather_parametrs")[0].innerHTML = `
 			<li><span class = "parametr">Ветер</span> ${weatherData.wind.speed} m/s</li>
@@ -32,7 +30,23 @@ function errorHandlerForGetPosition(err) {
 	updateGeo(53.9, 27.5667);
 }
 
-
-function main() {
+function loadMainCity() {
 	navigator.geolocation.getCurrentPosition(updateMainGeo, errorHandlerForGetPosition);
+}
+
+function setReloadPage() {
+	document.getElementsByClassName("main_city_name")[0].innerHTML = "???";
+	document.getElementsByClassName("main_city_temperature")[0].innerHTML = "???";
+	document.getElementsByClassName("weather_image")[0].innerHTML = '<img src="images/penguin.png" width=100 height=100></img>';
+	document.getElementsByClassName("weather_parametrs")[0].innerHTML = `
+			<li><span class = "parametr">Ветер</span> ??? </li>
+			<li><span class = "parametr">Облачность</span> ??? </li>
+			<li><span class = "parametr">Давление</span> ??? </li>
+			<li><span class = "parametr">Влажность</span> ??? </li>
+			<li><span class = "parametr">Координаты</span> ??? </li>`
+}
+
+function reloadMainCity() {
+	loadMainCity();
+	setReloadPage();
 }
