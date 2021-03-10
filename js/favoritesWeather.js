@@ -15,7 +15,15 @@ function clearFavoriteCityInpit() {
 	document.getElementById('add_city_input').value = '';
 }
 
-function addCityToPage(weatherData) {
+function removeLoad(loadId) {
+	if(document.getElementById(loadId + "li") != null) {
+		document.getElementById(loadId + "li").style.display = "none"
+	}
+}
+
+function addCityToPage(weatherData, loadId) {
+	removeLoad(loadId);
+	
 	var ul = document.getElementById("favorites_cities");
 	var li = document.createElement("li");
 	li.setAttribute("id", weatherData.name + "li");
@@ -75,8 +83,37 @@ function chechIsNewCity(name) {
 	return true;
 }
 
+function addReloadFavorite(loadId) {
+	var ul = document.getElementById("favorites_cities");
+	var li = document.createElement("li");
+	li.setAttribute("id", loadId + "li");
+	li.setAttribute("class", "favorite_city");
+	li.innerHTML = `<div class="favorite_city_name">
+					<h3>???</h3>
+				</div>
+				<div class="favorite_city_temperature">
+					<span>???</span>
+				</div>
+				<div class="favorite_city_image">
+					<img src="images/penguin.png" width=50 height=50></img>
+				</div>
+				<div class="favorite_city_close">
+					<button class="round_button" id = "${loadId}" onClick = "removeCityFromFavorite(this.id);">X</button>
+				</div>
+				<ul class="favorite_city_parametrs">
+					<li><span class = "parametr">Ветер</span> ??? </li>
+					<li><span class = "parametr">Облачность</span> ???</li>
+					<li><span class = "parametr">Давление</span> ??? </li>
+					<li><span class = "parametr">Влажность</span> ??? </li>
+					<li><span class = "parametr">Координаты</span> [???, ???]</li>
+				</ul>`
+	ul.appendChild(li);
+}
+
 function addNewCityToFavorite() {
 	var name = document.getElementById('add_city_input').value;
+	var loadId = Math.floor(Math.random() * 1000);
+	addReloadFavorite(loadId);
 	clearFavoriteCityInpit();
 	
 	let xhr = new XMLHttpRequest();
@@ -86,11 +123,12 @@ function addNewCityToFavorite() {
 		weatherData = JSON.parse(xhr.response);
 		if (checkIsValidCity(xhr)) {
 			if (!chechIsNewCity(weatherData.name)) {
-				alert("City name " + name + " is saved to Favorites");
+				removeLoad(loadId)
+				alert("City name " + name + " already added to Favorites");
 				return;
 			}
 			saveCityToStorage(weatherData.name);
-			addCityToPage(weatherData);
+			addCityToPage(weatherData, loadId);
 		}
 		else {
 			alert("City name " + name + " is incorrect");

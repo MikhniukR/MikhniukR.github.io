@@ -30,7 +30,7 @@ h2 {
 }
 
 h3 {
-	font-size: 30px;
+	font-size: 20px;
 }
 
 ul {
@@ -103,9 +103,9 @@ li {
 }
 
 .round_button {
-	height:50px;
-    width:50px;
-	margin-left: 15px;
+	height:40px;
+    width:40px;
+	margin-left: 5px;
 	padding: 0;
 	font-size: 24px;
 	color: #FFFFFF;
@@ -116,17 +116,17 @@ li {
 
 .favorites_cities {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(auto-fill);
+	grid-template-columns: repeat(2, 49%);
+    grid-template-rows: repeat(auto-fill);
 	grid-row-gap: .5em;
-	grid-column-gap: 1em;
+	grid-column-gap: 2%;
 }
 
 .favorite_city {
 	background-color: #FFFFFF;
 	color: #505050;
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: auto auto 50px 50px;
 	grid-template-rows: auto;
 	grid-template-areas:
 		"favorite_city_name favorite_city_temperature favorite_city_image favorite_city_close"
@@ -139,7 +139,7 @@ li {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 30px;
+	font-size: 25px;
 }
 
 .favorite_city_image{
@@ -242,6 +242,9 @@ li {
 	h2 {
 		font-size: 30px;
 	}
+	h2 {
+		font-size: 17px;
+	}
 	.main_city_temperature {
 		font-size: 55px;
 	}
@@ -258,6 +261,14 @@ li {
 	.main_city_temperature {
 		font-size: 50px;
 	}
+
+	.favorite_city_temperature{
+		font-size: 17px;
+	}
+
+	h3 {
+		font-size: 17px;
+	}
 }
 
 @media screen and (max-width: 768px) {
@@ -271,11 +282,11 @@ li {
 	}
 
 	.favorite_city_temperature{
-		font-size: 20px;
+		font-size: 25px;
 	}
 
 	h3 {
-		font-size: 20px;
+		font-size: 25px;
 	}
 
 	.round_button {
@@ -303,8 +314,8 @@ li {
 
 	.favorites_cities {
 		display: grid;
-		grid-template-columns: repeat(1, 1fr);
-		grid-template-rows: repeat(2, 50%);
+		grid-template-columns: repeat(1, auto);
+		grid-template-rows: repeat(auto-fill);
 		grid-row-gap: .5em;
 		grid-column-gap: 1em;
 	}
@@ -345,6 +356,14 @@ li {
 	}
 	.main_city_temperature {
 		font-size: 40px;
+	}
+
+	.favorite_city_temperature{
+		font-size: 20px;
+	}
+
+	h3 {
+		font-size: 20px;
 	}
 	.update_geo_button {
 		width: 40px;
