@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="keywords" content="weather, city">
 	<meta name="description" content="get your weather here">
-	<meta name="author" content="Daniil Samoylov">
+	<meta name="author" content="Roman Mikhniuk">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -14,15 +14,15 @@
 	<script src="js/mainWeather.js"></script>
 	<script src="js/favoritesWeather.js"></script>
 </head>
-<body onload="loadMainCity(); loadFavorites();">
+<body>
 	<main>
 		<div class = "title">
 			<h1>Погода здесь</h1>
 		</div>
 		
 		<div class="update_geo">
-			<button class="update_geo_button" onclick = "reloadMainCity();">
-				<img id="update_geo_image" src="images/update.png"></img>
+			<button class="update_geo_button" id = "update_geo_button">
+				<img id="update_geo_image" src="images/update.png"/>
 				<div id="update_geo_text">Обновить геолокацию</div>
 			</button>
 		</div>
@@ -32,7 +32,7 @@
 		</div>
 		
 		<div class = "weather_image">
-			<img src="images/penguin.png" width=100 height=100></img>
+			<img id='weather_image_img' src="images/penguin.png" width=100 height=100/>
 		</div>
 		
 		<div class = "temperature">
@@ -40,44 +40,46 @@
 		</div> 
 
 		<ul class="weather_parametrs">
-			<li><span class = "parametr">Ветер</span> ???</li>
-			<li><span class = "parametr">Облачность</span> ???</li>
-			<li><span class = "parametr">Давление</span> ???</li>
-			<li><span class = "parametr">Влажность</span> ???</li>
-			<li><span class = "parametr">Координаты</span> ???</li>
+			<li><span class = "parametr" >Ветер</span> <span id = "wind">???</span></li>
+			<li><span class = "parametr" >Облачность</span> <span id = "cloudCover">???</span></li>
+			<li><span class = "parametr" >Давление</span> <span id = "pressure">???</span></li>
+			<li><span class = "parametr">Влажность</span> <span id = "humidity">???</span></li>
+			<li><span class = "parametr">Координаты</span> <span id = "coordinates">???</span></li>
 		</ul>
 
 		<div class = "favorites">
 			<h2>Избранное</h2>
 		</div>
 
-		<div class = "add_city">
-			<input id = "add_city_input" class = "add_city_input" placeholder = "Добавить новый город" onkeydown="checkIsEnter()">
-			<button class = "round_button" onclick = "addNewCityToFavorite()">+</button>
-		</div>
+		<form class = "add_city" id = "add_city">
+			<input id = "add_city_input" class = "add_city_input" placeholder = "Добавить новый город">
+			<button class = "round_button">+</button>
+		</form>
 
 		<ul class = "favorites_cities" id = "favorites_cities">
-			<li class = "favorite_city" style="display: none;" >
-				<div class="favorite_city_name">
-					<h3>Moscow</h3>
-				</div>
-				<div class="favorite_city_temperature">
-					<span>5°C</span>
-				</div>
-				<div class="favorite_city_image">
-					<img src="images/penguin.png" width=50 height=50></img>
-				</div>
-				<div class="favorite_city_close">
-					<button class="round_button">X</button>
-				</div>
-				<ul class="favorite_city_parametrs">
-					<li><span class = "parametr">Ветер</span> 5 m/s, NW</li>
-					<li><span class = "parametr">Облачность</span> Broken clouds</li>
-					<li><span class = "parametr">Давление</span> 1013 hpa</li>
-					<li><span class = "parametr">Влажность</span> 52%</li>
-					<li><span class = "parametr">Координаты</span> [59.88, 30.42]</li>
-				</ul>
-			</li>
+			<template id="favoriteCityTemplate">
+				<li class = "favorite_city">
+					<div class="favorite_city_name">
+						<h3 class="favorite_city_name_h3">???</h3>
+					</div>
+					<div class="favorite_city_temperature">
+						<span class="favorite_city_temperature_span">???°C</span>
+					</div>
+					<div class="favorite_city_image">
+						<img class = "favorite_city_image_img" src="images/penguin.png" width=50 height=50/>
+					</div>
+					<div class="favorite_city_close">
+						<button class="round_button">X</button>
+					</div>
+					<ul class="favorite_city_parametrs">
+						<li><span class = "parametr" id = "windFavorite" >Ветер</span> <span class="windFavorite">???</span></li>
+						<li><span class = "parametr" id = "cloudCoverFavorite" >Облачность</span> <span class="cloudCoverFavorite">???</span></li>
+						<li><span class = "parametr" id = "pressureFavorite" >Давление</span> <span class="pressureFavorite">???</span></li>
+						<li><span class = "parametr" id = "humidityFavorite">Влажность</span> <span class="humidityFavorite">???</span></li>
+						<li><span class = "parametr" id = "coordinatesFavorite">Координаты</span> <span class="coordinatesFavorite">???</span></li>
+					</ul>
+				</li>
+			</template>
 		</ul>
 	</main>
 </body>

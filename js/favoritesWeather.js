@@ -1,9 +1,9 @@
 function removeCityFromFavorite(buttonId) {
-	document.getElementById(buttonId + "li").style.display = "none"; 
+	document.getElementById(buttonId + "li").style.display = "none";
 
-	var favorites = JSON.parse(localStorage.getItem("favorites"));
-	for(var i = 0; i < favorites.length; i++) {
-		if (favorites[i] == buttonId) {
+	let favorites = JSON.parse(localStorage.getItem("favorites"));
+	for(let i = 0; i < favorites.length; i++) {
+		if (favorites[i] === buttonId) {
 			favorites.splice(i, 1);
 			break;
 		}
@@ -11,7 +11,7 @@ function removeCityFromFavorite(buttonId) {
 	localStorage.setItem("favorites", JSON.stringify(favorites));
 }
 
-function clearFavoriteCityInpit() {
+function clearFavoriteCityInput() {
 	document.getElementById('add_city_input').value = '';
 }
 
@@ -23,35 +23,29 @@ function removeLoad(loadId) {
 
 function addCityToPage(weatherData, loadId) {
 	removeLoad(loadId);
-	
-	var ul = document.getElementById("favorites_cities");
-	var li = document.createElement("li");
-	li.setAttribute("id", weatherData.name + "li");
-	li.setAttribute("class", "favorite_city");
-	li.innerHTML = `<div class="favorite_city_name">
-					<h3>${weatherData.name}</h3>
-				</div>
-				<div class="favorite_city_temperature">
-					<span>${~~weatherData.main.temp}°C</span>
-				</div>
-				<div class="favorite_city_image">
-					<img src="https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png" width=50 height=50></img>
-				</div>
-				<div class="favorite_city_close">
-					<button class="round_button" id = "${weatherData.name}" onClick = "removeCityFromFavorite(this.id);">X</button>
-				</div>
-				<ul class="favorite_city_parametrs">
-					<li><span class = "parametr">Ветер</span> ${weatherData.wind.speed} m/s</li>
-					<li><span class = "parametr">Облачность</span> ${weatherData.weather[0].description}</li>
-					<li><span class = "parametr">Давление</span> ${weatherData.main.pressure} hpa</li>
-					<li><span class = "parametr">Влажность</span> ${weatherData.main.humidity} %</li>
-					<li><span class = "parametr">Координаты</span> [${weatherData.coord.lon}, ${weatherData.coord.lat}]</li>
-				</ul>`
-	ul.appendChild(li);
+	let mainUl = document.getElementById("favorites_cities");
+	let template = document.getElementById("favoriteCityTemplate");
+	let clone = document.importNode(template.content.firstElementChild, true);
+	clone.setAttribute("id", weatherData.name + "li");
+	clone.getElementsByClassName("favorite_city_name_h3")[0].textContent = weatherData.name;
+	clone.getElementsByClassName("favorite_city_temperature_span")[0].textContent = ~~weatherData.main.temp + "°C";
+	clone.getElementsByClassName("favorite_city_image_img")[0].src = `https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
+
+	clone.getElementsByClassName("windFavorite")[0].textContent = `${weatherData.wind.speed}  m/s`;
+	clone.getElementsByClassName("cloudCoverFavorite")[0].textContent = `${weatherData.weather[0].description}`;
+	clone.getElementsByClassName("pressureFavorite")[0].textContent = `${weatherData.main.pressure}  hpa`;
+	clone.getElementsByClassName("humidityFavorite")[0].textContent = `${weatherData.main.humidity}  %`;
+	clone.getElementsByClassName("coordinatesFavorite")[0].textContent = `[${weatherData.coord.lon}, ${weatherData.coord.lat}]`;
+
+	let closeButton = clone.getElementsByClassName("round_button")[0];
+	closeButton.id = weatherData.name;
+	closeButton.addEventListener("click", (event) => removeCityFromFavorite(event.target.id))
+
+	mainUl.appendChild(clone);
 }
 
 function loadFavoriteCity(name) {
-	clearFavoriteCityInpit();
+	clearFavoriteCityInput();
 	let xhr = new XMLHttpRequest();
 	xhr.open("GET", `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${API_KEY}&units=metric`);
 	xhr.send();
@@ -62,7 +56,7 @@ function loadFavoriteCity(name) {
 }
 
 function saveCityToStorage(name) {
-	var favorites = JSON.parse(localStorage.getItem("favorites"));
+	let favorites = JSON.parse(localStorage.getItem("favorites"));
 	if (favorites === null) {
 		favorites = []
 	}
@@ -71,12 +65,12 @@ function saveCityToStorage(name) {
 
 }
 
-function chechIsNewCity(name) {
-	var favorites = JSON.parse(localStorage.getItem("favorites"));
+function checkIsNewCity(name) {
+	let favorites = JSON.parse(localStorage.getItem("favorites"));
 	if (favorites === null)
 		return true;
-	for (var i = 0; i < favorites.length; i++) {
-		if (favorites[i] == name) {
+	for (let i = 0; i < favorites.length; i++) {
+		if (favorites[i] === name) {
 			return false;
 		}
 	} 
@@ -84,46 +78,27 @@ function chechIsNewCity(name) {
 }
 
 function addReloadFavorite(loadId) {
-	var ul = document.getElementById("favorites_cities");
-	var li = document.createElement("li");
-	li.setAttribute("id", loadId + "li");
-	li.setAttribute("class", "favorite_city");
-	li.innerHTML = `<div class="favorite_city_name">
-					<h3>???</h3>
-				</div>
-				<div class="favorite_city_temperature">
-					<span>???</span>
-				</div>
-				<div class="favorite_city_image">
-					<img src="images/penguin.png" width=50 height=50></img>
-				</div>
-				<div class="favorite_city_close">
-					<button class="round_button" id = "${loadId}" onClick = "removeCityFromFavorite(this.id);">X</button>
-				</div>
-				<ul class="favorite_city_parametrs">
-					<li><span class = "parametr">Ветер</span> ??? </li>
-					<li><span class = "parametr">Облачность</span> ???</li>
-					<li><span class = "parametr">Давление</span> ??? </li>
-					<li><span class = "parametr">Влажность</span> ??? </li>
-					<li><span class = "parametr">Координаты</span> [???, ???]</li>
-				</ul>`
-	ul.appendChild(li);
+	let mainUl = document.getElementById("favorites_cities");
+	let template = document.getElementById("favoriteCityTemplate");
+	let clone = document.importNode(template.content.firstElementChild, true);
+	clone.setAttribute("id", loadId + "li");
+	mainUl.appendChild(clone);
 }
 
 function addNewCityToFavorite() {
-	var name = document.getElementById('add_city_input').value;
-	var loadId = Math.floor(Math.random() * 1000);
+	let name = document.getElementById('add_city_input').value;
+	let loadId = Math.floor(Math.random() * 1000);
 	addReloadFavorite(loadId);
-	clearFavoriteCityInpit();
+	clearFavoriteCityInput();
 	
 	let xhr = new XMLHttpRequest();
 	xhr.open("GET", `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${API_KEY}&units=metric`);
 	xhr.send();
 	xhr.onload = function() {
-		weatherData = JSON.parse(xhr.response);
+		let weatherData = JSON.parse(xhr.response);
 		if (checkIsValidCity(xhr)) {
-			if (!chechIsNewCity(weatherData.name)) {
-				removeLoad(loadId)
+			if (!checkIsNewCity(weatherData.name)) {
+				removeLoad(loadId);
 				alert("City name " + name + " already added to Favorites");
 				return;
 			}
@@ -132,27 +107,38 @@ function addNewCityToFavorite() {
 		}
 		else {
 			alert("City name " + name + " is incorrect");
+			removeLoad(loadId);
 		}
+	}
+
+	xhr.onerror = function () {
+		removeLoad(loadId);
+		alert("Sorry, our backend unavailable");
+	}
+	xhr.ontimeout = function () {
+		removeLoad(loadId);
+		alert("Sorry, our backend unavailable");
 	}
 }
 
 function checkIsValidCity(xhr) {
-	if (xhr.status != 200)
-		return false;
-	return true;
-}
-
-function checkIsEnter() {
-	if(event.key === 'Enter') {
-        addNewCityToFavorite();       
-    }
+	return xhr.status === 200;
 }
 
 function loadFavorites() {
-	var favorites = JSON.parse(localStorage.getItem("favorites"));
+	let favorites = JSON.parse(localStorage.getItem("favorites"));
 	if (favorites != null) {
-		for(var i = 0; i < favorites.length; i++) {
+		for(let i = 0; i < favorites.length; i++) {
 			loadFavoriteCity(favorites[i], false);
 		}
 	}
 }
+
+
+window.addEventListener('load', (event) => {
+	let addCityForm = document.getElementById("add_city");
+	addCityForm.addEventListener("submit", (event) => {
+		addNewCityToFavorite();
+    	event.preventDefault();
+	});
+});
